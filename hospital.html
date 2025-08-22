@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HealthHub - Hospital Support Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4ff;
+      color: #222;
+    }
+
+    /* Header */
+    header {
+      background: #1565c0;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 18px;
+    }
+
+    /* 3-dot button */
+    .menu-btn {
+      font-size: 26px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* Nav hidden */
+    nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      background: #0d47a1;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+      overflow: hidden;
+      z-index: 1000;
+    }
+
+    nav a {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      padding: 0.8rem 1.2rem;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: #1976d2;
+    }
+
+    nav.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Main */
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    section {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    section h2 {
+      margin-bottom: 0.8rem;
+      color: #1565c0;
+    }
+
+    /* Link cards */
+    ul.link-list {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    ul.link-list li {
+      flex: 1 1 calc(33.33% - 15px);
+      min-width: 200px;
+    }
+
+    ul.link-list li a {
+      display: block;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 8px;
+      background: #e3f2fd;
+      color: #0d47a1;
+      font-weight: 600;
+      transition: 0.3s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    ul.link-list li a:hover {
+      background: #bbdefb;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    #searchBox {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border: 1px solid #90caf9;
+      border-radius: 6px;
+    }
+.back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #004080;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #e56f1f;
+    }
+
+    @media(max-width: 600px) {
+      ul.link-list {
+        flex-direction: column;
+      }
+      ul.link-list li {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🏥 HealthHub</h1>
+  <div class="menu-btn" onclick="toggleMenu()">⋮</div>
+  <nav id="navMenu">
+    <a href="#hospitals">Hospitals</a>
+    <a href="#medicines">Medicines</a>
+    <a href="#blood">Blood</a>
+    <a href="#help">Help</a>
+    <a href="#websites">More</a>
+  </nav>
+</header>
+
+<main>
+  <input type="text" id="searchBox" placeholder="🔍 Search Hospital, Blood, Medicine..." onkeyup="filterLinks()"/>
+
+  <section id="hospitals">
+    <h2>🏥 Nearby Hospitals</h2>
+    <ul class="link-list">
+      <li><a href="https://www.google.com/maps/search/hospitals+near+me" target="_blank">Google Maps</a></li>
+      <li><a href="https://www.nhp.gov.in/hospital-finder" target="_blank">Hospital Finder (India)</a></li>
+    </ul>
+  </section>
+
+  <section id="medicines">
+    <h2>💊 Order Medicines Online</h2>
+    <ul class="link-list">
+      <li><a href="https://www.1mg.com/" target="_blank">Tata 1mg</a></li>
+      <li><a href="https://www.netmeds.com/" target="_blank">Netmeds</a></li>
+      <li><a href="https://www.apollopharmacy.in/" target="_blank">Apollo Pharmacy</a></li>
+    </ul>
+  </section>
+
+  <section id="blood">
+    <h2>🩸 Blood Availability</h2>
+    <ul class="link-list">
+      <li><a href="https://www.eraktkosh.in/" target="_blank">e-Raktkosh</a></li>
+      <li><a href="https://indianredcross.org/" target="_blank">Red Cross Society</a></li>
+    </ul>
+  </section>
+
+  <section id="help">
+    <h2>🧑‍⚕️ Patient Help & First Aid</h2>
+    <ul class="link-list">
+      <li><a href="https://www.who.int/health-topics/first-aid" target="_blank">WHO First Aid</a></li>
+      <li><a href="https://www.emergency-live.com/" target="_blank">Emergency Info</a></li>
+    </ul>
+  </section>
+
+  <section id="websites">
+    <h2>🌐 Government & Health Portals</h2>
+    <ul class="link-list">
+      <li><a href="https://www.nhp.gov.in/" target="_blank">National Health Portal</a></li>
+      <li><a href="https://www.mohfw.gov.in/" target="_blank">Ministry of Health</a></li>
+      <li><a href="https://www.who.int/" target="_blank">World Health Organization</a></li>
+    </ul>
+  </section>
+    <a href="index.html" class="back-btn">⬅Back to Home</a>
+  </div>
+</main>
+
+<script>
+  function filterLinks() {
+    const input = document.getElementById("searchBox").value.toLowerCase();
+    const lists = document.querySelectorAll(".link-list li");
+    lists.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(input) ? "block" : "none";
+    });
+  }
+
+  function toggleMenu() {
+    document.getElementById("navMenu").classList.toggle("active");
+  }
+
+  // बाहर क्लिक करने पर मेन्यू बंद
+  document.addEventListener("click", function(e) {
+    const menu = document.getElementById("navMenu");
+    const btn = document.querySelector(".menu-btn");
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove("active");
+    }
+  });
+</script>
+
+</body>
+</html>
